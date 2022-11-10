@@ -1,21 +1,40 @@
-import React, { Component } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import Notifications from "./Notifications";
 
-const answer = "test answer";
+function Post(params) {
+  const [isLoading, setLoading] = useState(true);
+  const [answer, setAnswer] = useState();
 
-class Post extends Component {
-  constructor(props) {
-    super(props);
-    const userMessage = this.props.previousStep.value;
-    console.log(userMessage);
+  useEffect(() => {
+    const URI =
+      "http://localhost:8080/api/answers/" + params.previousStep.message;
+    axios
+      .get(URI, {
+        crossdomain: true,
+      })
+      .then((response) => {
+        setAnswer(response.data);
+        setLoading(false);
+      })
+      .catch(() => {
+        setAnswer(
+          "Ops, something went wrong! Please, check your message, or try again later."
+        );
+        setLoading(false);
+      });
+  }, [params.previousStep.message]);
 
-    this.state = { userMessage };
+  if (isLoading) {
+    return <div>Still thinking...</div>;
   }
 
-  componentDidMount() {}
-
-  render() {
-    return <div>{answer}</div>;
-  }
+  return (
+    <>
+      <div>{answer}</div>
+      <Notifications triggerNextStep={params.triggerNextStep} />
+    </>
+  );
 }
 
 export default Post;

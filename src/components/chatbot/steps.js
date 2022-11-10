@@ -1,21 +1,25 @@
 import Post from "./Post";
+import Notifications from "./Notifications";
 
 const steps = [
   {
-    id: "1",
-    trigger: "2",
-    message: "initial",
+    id: "initial",
+    component: (
+      <Notifications message={"Hello! I'm here to help! Ask me something."} />
+    ),
+    asMessage: true,
+    trigger: "userQuestion",
   },
   {
-    id: "2",
+    id: "userQuestion",
     user: true,
-    trigger: "3",
+    trigger: "botAnswer",
   },
   {
-    id: "3",
+    id: "botAnswer",
     component: <Post />,
     asMessage: true,
-    trigger: "2",
+    trigger: "userQuestion",
   },
 ];
 

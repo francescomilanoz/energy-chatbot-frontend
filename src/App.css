@@ -1,0 +1,12 @@
+:root {
+    --lightGreenBackground: #f1f8e9;
+    --mediumGreenBackground: #ecffbb;
+}
+
+html, body {
+    height: 100%;
+    background-image: linear-gradient(var(--mediumGreenBackground), var(--lightGreenBackground));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
