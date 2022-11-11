@@ -1,13 +1,11 @@
 import Post from "./Post";
-import NotificationMessage from "./NotificationMessage";
+import BuildMessage from "./BuildMessage";
 
 const steps = [
   {
     id: "initial",
     component: (
-      <NotificationMessage
-        message={"Hello! I'm here to help! Ask me something."}
-      />
+      <BuildMessage message={"Hello! I'm here to help! Ask me something."} />
     ),
     asMessage: true,
     trigger: "userQuestion",
@@ -20,6 +18,12 @@ const steps = [
   {
     id: "botAnswer",
     component: <Post />,
+    asMessage: true,
+    trigger: "userQuestion",
+  },
+  {
+    id: "fetchNotifications",
+    component: <Post buttonClicked={"notifications"} />,
     asMessage: true,
     trigger: "userQuestion",
   },

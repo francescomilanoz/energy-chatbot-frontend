@@ -21,7 +21,7 @@ const NotificationStyle = styled.button`
   }
 `;
 
-class NotificationMessage extends Component {
+class BuildMessage extends Component {
   constructor(props) {
     super(props);
 
@@ -37,7 +37,9 @@ class NotificationMessage extends Component {
 
   triggerNext() {
     this.setState({ trigger: true }, () => {
-      this.props.triggerNextStep();
+      this.props.triggerNextStep({
+        trigger: "fetchNotifications",
+      });
     });
   }
 
@@ -45,7 +47,7 @@ class NotificationMessage extends Component {
     const { trigger } = this.state;
 
     return (
-      <div className="notifications">
+      <div className="message">
         {!trigger && (
           <>
             <div>{this.props.message}</div>
@@ -63,4 +65,4 @@ class NotificationMessage extends Component {
   }
 }
 
-export default NotificationMessage;
+export default BuildMessage;

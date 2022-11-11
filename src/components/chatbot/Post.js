@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import NotificationMessage from "./NotificationMessage";
+import BuildMessage from "./BuildMessage";
 
 function Post(params) {
   const [isLoading, setLoading] = useState(true);
   const [answer, setAnswer] = useState();
 
   useEffect(() => {
-    const URI =
-      "http://localhost:8080/api/answers/" + params.previousStep.message;
+    let URI;
+    if (params.buttonClicked === "notifications") {
+      URI = "http://localhost:8080/api/answers/Read notifications";
+    } else {
+      URI = "http://localhost:8080/api/answers/" + params.previousStep.message;
+    }
+
     axios
       .get(URI, {
         crossdomain: true,
@@ -30,10 +35,7 @@ function Post(params) {
   }
 
   return (
-    <>
-      <div>{answer}</div>
-      <NotificationMessage triggerNextStep={params.triggerNextStep} />
-    </>
+    <BuildMessage message={answer} triggerNextStep={params.triggerNextStep} />
   );
 }
 
