@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Notifications from "./Notifications";
+import NotificationMessage from "./NotificationMessage";
 
 function Post(params) {
   const [isLoading, setLoading] = useState(true);
@@ -32,7 +32,7 @@ function Post(params) {
   return (
     <>
       <div>{answer}</div>
-      <Notifications triggerNextStep={params.triggerNextStep} />
+      <NotificationMessage triggerNextStep={params.triggerNextStep} />
     </>
   );
 }

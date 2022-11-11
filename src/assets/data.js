@@ -1,4 +1,4 @@
-export let notificationsNumber = 2;
+export let notificationsNumber = 3;
 
 export let lastMessageId = 0;
 

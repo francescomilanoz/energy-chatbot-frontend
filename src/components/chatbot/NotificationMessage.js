@@ -7,7 +7,7 @@ import {
   setLastMessageId,
 } from "../../assets/data";
 
-const NotificationsButton = styled.button`
+const NotificationStyle = styled.button`
   background-color: ${colors.lightGreenBackground};
   border-radius: 10px;
   margin-top: 10px;
@@ -21,7 +21,7 @@ const NotificationsButton = styled.button`
   }
 `;
 
-class Notifications extends Component {
+class NotificationMessage extends Component {
   constructor(props) {
     super(props);
 
@@ -51,9 +51,9 @@ class Notifications extends Component {
             <div>{this.props.message}</div>
             {notificationsNumber > 0 &&
               this.state.messageId === lastMessageId && (
-                <NotificationsButton onClick={() => this.triggerNext()}>
-                  Read Notifications
-                </NotificationsButton>
+                <NotificationStyle onClick={() => this.triggerNext()}>
+                  🔔 {notificationsNumber} new notifications
+                </NotificationStyle>
               )}
           </>
         )}
@@ -63,4 +63,4 @@ class Notifications extends Component {
   }
 }
 
-export default Notifications;
+export default NotificationMessage;

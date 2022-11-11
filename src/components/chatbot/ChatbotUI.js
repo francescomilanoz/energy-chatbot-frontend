@@ -5,11 +5,6 @@ import steps from "./steps";
 import leaf from "../../assets/images/leaf.png";
 import { colors } from "../../assets/colors";
 
-const config = {
-  width: "400px",
-  height: "600px",
-};
-
 const theme = {
   background: colors.whiteBackground,
   fontFamily: "sans-serif",
@@ -28,9 +23,10 @@ class ChatbotUI extends Component {
       <ThemeProvider theme={theme}>
         <ChatBot
           steps={steps}
-          {...config}
+          width={"60vh"}
+          height={"85vh"}
           userDelay={0}
-          headerTitle={"EcoBot"}
+          headerTitle={"💡 EcoBot"}
           botAvatar={leaf}
         />
       </ThemeProvider>
