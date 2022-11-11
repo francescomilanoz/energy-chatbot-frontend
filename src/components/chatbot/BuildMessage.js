@@ -1,4 +1,4 @@
-import React, { Component, useEffect } from "react";
+import React, { Component } from "react";
 import styled from "styled-components";
 import { colors } from "../../assets/colors";
 import { lastMessageId, setLastMessageId } from "../../assets/data";
@@ -76,12 +76,12 @@ class BuildMessage extends Component {
         <div>{this.props.message}</div>
         {!trigger && (
           <>
-            {notificationsNumber > 0 &&
-              this.state.messageId === lastMessageId && (
-                <NotificationStyle onClick={() => this.triggerNext()}>
-                  🔔 {notificationsNumber} new notification(s)
-                </NotificationStyle>
-              )}
+            {notificationsNumber > 0 && this.state.messageId === lastMessageId && (
+              <NotificationStyle onClick={() => this.triggerNext()}>
+                🔔 {notificationsNumber} new notification
+                {notificationsNumber > 1 ? "s" : ""}
+              </NotificationStyle>
+            )}
           </>
         )}
       </div>

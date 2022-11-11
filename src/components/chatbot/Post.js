@@ -28,7 +28,7 @@ function Post(params) {
         );
         setLoading(false);
       });
-  }, [params.previousStep.message]);
+  }, [params.buttonClicked, params.previousStep.message]);
 
   if (isLoading) {
     return <div>Still thinking...</div>;

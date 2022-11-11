@@ -24,7 +24,6 @@ const steps = [
   {
     id: "fetchNotifications",
     message: "Okay! I'm fetching your notifications!",
-    asMessage: true,
     trigger: "fetchNotifications2",
   },
   {
