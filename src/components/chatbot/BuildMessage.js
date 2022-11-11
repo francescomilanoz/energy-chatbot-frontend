@@ -1,11 +1,8 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import styled from "styled-components";
 import { colors } from "../../assets/colors";
-import {
-  lastMessageId,
-  notificationsNumber,
-  setLastMessageId,
-} from "../../assets/data";
+import { lastMessageId, setLastMessageId } from "../../assets/data";
+import axios from "axios";
 
 const NotificationStyle = styled.button`
   background-color: ${colors.lightGreenBackground};
@@ -30,9 +27,34 @@ class BuildMessage extends Component {
     this.state = {
       trigger: false,
       messageId: lastMessageId,
+      notificationsNumber: 0,
     };
 
     this.triggerNext = this.triggerNext.bind(this);
+  }
+
+  async waitForNextFetch() {
+    return new Promise((res) => setTimeout(res, 1000));
+  }
+
+  async requestNotificationNumber() {
+    const URI = "http://localhost:8080/api/notifications/number";
+
+    axios
+      .get(URI, {
+        crossdomain: true,
+      })
+      .then(async (response) => {
+        this.setState({ notificationsNumber: parseInt(response.data) });
+        await this.waitForNextFetch();
+        this.requestNotificationNumber();
+      })
+      .catch(async (error) => {
+        this.setState({ notificationsNumber: 0 });
+        console.log("Error in fetching the number of notifications: " + error);
+        await this.waitForNextFetch();
+        this.requestNotificationNumber();
+      });
   }
 
   triggerNext() {
@@ -43,23 +65,25 @@ class BuildMessage extends Component {
     });
   }
 
-  render() {
-    const { trigger } = this.state;
+  componentDidMount() {
+    this.requestNotificationNumber();
+  }
 
+  render() {
+    const { trigger, notificationsNumber } = this.state;
     return (
       <div className="message">
+        <div>{this.props.message}</div>
         {!trigger && (
           <>
-            <div>{this.props.message}</div>
             {notificationsNumber > 0 &&
               this.state.messageId === lastMessageId && (
                 <NotificationStyle onClick={() => this.triggerNext()}>
-                  🔔 {notificationsNumber} new notifications
+                  🔔 {notificationsNumber} new notification(s)
                 </NotificationStyle>
               )}
           </>
         )}
-        {trigger && <div>{"Okay! I'm fetching your notifications!"}</div>}
       </div>
     );
   }

@@ -23,6 +23,12 @@ const steps = [
   },
   {
     id: "fetchNotifications",
+    message: "Okay! I'm fetching your notifications!",
+    asMessage: true,
+    trigger: "fetchNotifications2",
+  },
+  {
+    id: "fetchNotifications2",
     component: <Post buttonClicked={"notifications"} />,
     asMessage: true,
     trigger: "userQuestion",

@@ -1,7 +1,7 @@
 import { Component } from "react";
 import styled from "styled-components";
 import { colors } from "../assets/colors";
-import { notificationsNumber } from "../assets/data";
+import axios from "axios";
 
 const ButtonStyle = styled.button`
   background-color: ${colors.primary};
@@ -18,15 +18,30 @@ const ButtonStyle = styled.button`
   }
 `;
 
-function increaseNotificationsCount() {
-  notificationsNumber += 1;
-  console.log(notificationsNumber);
+async function createNotification(type, appliance, priority) {
+  await axios
+    .post("http://localhost:8080/api/notifications/", {
+      type: type,
+      appliance: appliance,
+      priority: priority,
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 }
 
 class NotificationButton extends Component {
   render() {
     return (
-      <ButtonStyle onClick={increaseNotificationsCount}>
+      <ButtonStyle
+        onClick={() =>
+          createNotification(
+            this.props.type,
+            this.props.appliance,
+            this.props.priority
+          )
+        }
+      >
         {this.props.buttonText}
       </ButtonStyle>
     );
