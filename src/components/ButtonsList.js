@@ -8,26 +8,17 @@ const StyledDiv = styled.div`
   position: absolute;
   right: 5vh;
   bottom: 5vh;
+  font-family: "Arial", serif;
 `;
 
 class ButtonsList extends Component {
   render() {
     return (
       <StyledDiv>
+        Generate notification...
+        <NotificationButton type={"area"} appliance={"fridge"} priority={101} />
+        <NotificationButton type={"goal"} appliance={"home"} priority={100} />
         <NotificationButton
-          buttonText={"Generate notification type #1"}
-          type={"area"}
-          appliance={"fridge"}
-          priority={100}
-        />
-        <NotificationButton
-          buttonText={"Generate notification type #2"}
-          type={"goal"}
-          appliance={"home"}
-          priority={100}
-        />
-        <NotificationButton
-          buttonText={"Generate notification type #3"}
           type={"goal"}
           appliance={"dishwasher"}
           priority={3}

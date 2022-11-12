@@ -42,7 +42,9 @@ class NotificationButton extends Component {
           )
         }
       >
-        {this.props.buttonText}
+        Of type {this.props.type.toUpperCase()} for
+        {" " + this.props.appliance.toUpperCase()} with priority
+        {" " + this.props.priority}
       </ButtonStyle>
     );
   }
