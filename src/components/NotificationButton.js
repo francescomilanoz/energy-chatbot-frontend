@@ -18,6 +18,9 @@ const ButtonStyle = styled.button`
   }
 `;
 
+/**
+ * This function makes an API call to the backend to create a new notification.
+ */
 async function createNotification(type, appliance, priority) {
   await axios
     .post("http://localhost:8080/api/notifications/", {
@@ -30,6 +33,10 @@ async function createNotification(type, appliance, priority) {
     });
 }
 
+/**
+ * This class represents the button that is used to create a new notification on the backend when pressed.
+ * It will display a text to understand the type of notification that will be created, and the appliance and priority.
+ */
 class NotificationButton extends Component {
   render() {
     return (

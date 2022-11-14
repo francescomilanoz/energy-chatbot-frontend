@@ -17,15 +17,18 @@ const theme = {
   userFontColor: "black",
 };
 
+/**
+ * This component displays the chatbot, using the react-simple-chatbot library.
+ */
 class ChatbotUI extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
         <ChatBot
-          steps={steps}
+          steps={steps} // used to define the conversation flow, and enable/disable the TextArea
           width={"60vh"}
           height={"85vh"}
-          userDelay={0}
+          userDelay={0} // used to remove the delay before printing the bubble with the user message
           headerTitle={"💡 EcoBot"}
           botAvatar={leaf}
         />
