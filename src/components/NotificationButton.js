@@ -27,6 +27,12 @@ async function createNotification(type, appliance, priority) {
       type: type,
       appliance: appliance,
       priority: priority,
+      message:
+        "Notification for " +
+        appliance +
+        " that executes action " +
+        type +
+        ". Do you want to execute that action? ",
     })
     .catch((error) => {
       console.log(error);

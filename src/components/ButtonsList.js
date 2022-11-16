@@ -20,12 +20,17 @@ class ButtonsList extends Component {
     return (
       <StyledDiv>
         Generate notification...
-        <NotificationButton type={"area"} appliance={"fridge"} priority={101} />
-        <NotificationButton type={"goal"} appliance={"home"} priority={100} />
+        <NotificationButton type={"exit"} appliance={"fridge"} priority={4} />
+        <NotificationButton type={"goal.set"} appliance={"home"} priority={3} />
         <NotificationButton
-          type={"goal"}
+          type={"suggestion"}
           appliance={"dishwasher"}
-          priority={3}
+          priority={2}
+        />
+        <NotificationButton
+          type={"invalid_type"}
+          appliance={"dishwasher"}
+          priority={1}
         />
       </StyledDiv>
     );
