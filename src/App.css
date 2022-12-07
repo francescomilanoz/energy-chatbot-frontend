@@ -1,6 +1,7 @@
 :root {
     --lightGreenBackground: #f1f8e9;
     --mediumGreenBackground: #ecffbb;
+    --darkGreenText: #0f360f;
 }
 
 html, body {
@@ -9,4 +10,21 @@ html, body {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+h1 {
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 3rem;
+    color: var(--darkGreenText);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+p {
+    font-family: sans-serif;
+    font-weight: bold;
+    color: var(--darkGreenText);
 }

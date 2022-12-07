@@ -1,7 +1,7 @@
 import { Component } from "react";
 import styled from "styled-components";
 import { colors } from "../assets/colors";
-import axios from "axios";
+import createNotification from "../utils/createNotification";
 
 const ButtonStyle = styled.button`
   background-color: ${colors.primary};
@@ -17,27 +17,6 @@ const ButtonStyle = styled.button`
     transition: 0.5s background;
   }
 `;
-
-/**
- * This function makes an API call to the backend to create a new notification.
- */
-async function createNotification(type, appliance, priority) {
-  await axios
-    .post("http://localhost:8080/api/notifications/", {
-      type: type,
-      appliance: appliance,
-      priority: priority,
-      message:
-        "Notification for " +
-        appliance +
-        " that executes action " +
-        type +
-        ". Do you want to execute that action? ",
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
 
 /**
  * This class represents the button that is used to create a new notification on the backend when pressed.

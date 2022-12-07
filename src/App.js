@@ -1,20 +1,15 @@
-import React, { Component } from "react";
-import ChatbotUI from "./components/chatbot/ChatbotUI";
-import "./App.css";
-import ButtonsList from "./components/ButtonsList";
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Landing from "./pages/Landing";
+import Bot from "./pages/Bot";
 
-/**
- * Main component of the application.
- */
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <ChatbotUI />
-        <ButtonsList />
-      </div>
-    );
-  }
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Landing />} />
+        <Route path="bot" element={<Bot />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App;

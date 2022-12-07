@@ -24,7 +24,7 @@ class ButtonsList extends Component {
         <NotificationButton type={"goal.set"} appliance={"home"} priority={3} />
         <NotificationButton
           type={"suggestion"}
-          appliance={"dishwasher"}
+          appliance={"air conditioning"}
           priority={2}
         />
         <NotificationButton
