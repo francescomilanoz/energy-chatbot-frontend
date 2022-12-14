@@ -10,4 +10,4 @@ export function setLastMessageId(value) {
   lastMessageId = value;
 }
 
-// TODO REFACTOR THIS CLASS
+export const currentLanguage = "it"; // the current language of the chatbot interface. It can be "it" or "en". Please note that, in order to change the actual language of the chatbot input and ouput, you need to change the language in the backend, setting the "currentLanguage" parameter in the strings.js file

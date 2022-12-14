@@ -1,5 +1,6 @@
 import MessageBubble from "./MessageBubble";
 import BuildMessage from "./BuildMessage";
+import { currentLanguage } from "../../assets/data";
 
 /**
  * steps object is used by the ChatBot component to define the conversation flow, and when to activate the user input.
@@ -7,15 +8,27 @@ import BuildMessage from "./BuildMessage";
  * The fetchNotifications step is triggered when the user clicks on the "new notifications" button.
  */
 
-// production steps flow
+const startingMessage = {
+  en: "Hello! I'm here to help! Ask me something.",
+  it: "Ciao! Sono qui per aiutarti! Chiedimi qualcosa.",
+};
 
+const fetchingNotificationsMessage = {
+  en: "Okay! I'm fetching your notifications!",
+  it: "Okay! Sto caricando le tue notifiche!",
+};
+
+const testingInitialMessage = {
+  en: "You are consuming 20% more than your area for air conditioning. Do something about it!",
+  it: "Stai consumando il 20% in più della tua aria, per quanto riguarda l'aria condizionata. Fai qualcosa a riguardo!",
+};
+
+// production steps flow: use this steps to use the chatbot normally, in production
 /*const steps = [
   {
     id: "initial", // the conversation starts here, with a greeting from the chatbot.
     // we use directly BuildMessage and not MessageBubble since it's the first step and there is no loading state or no API request.
-    component: (
-      <BuildMessage message={"Hello! I'm here to help! Ask me something."} />
-    ),
+    component: <BuildMessage message={startingMessage[currentLanguage]} />,
     asMessage: true,
     trigger: "userQuestion",
   },
@@ -32,7 +45,7 @@ import BuildMessage from "./BuildMessage";
   },
   {
     id: "fetchNotifications", // triggered when the user clicks on the "new notifications" button
-    message: "Okay! I'm fetching your notifications!", // this step is used just to generate this notification bubble
+    message: fetchingNotificationsMessage[currentLanguage], // this step is used just to generate this notification bubble
     trigger: "fetchNotifications2",
   },
   {
@@ -43,16 +56,12 @@ import BuildMessage from "./BuildMessage";
   },
 ];*/
 
-// experimentation phase steps flow (for testing purposes: it assumes there is a notification already open)
+// experimentation phase steps flow (for testing purposes: it assumes there is a notification already open). If you are using the chatbot in production mode, please use the steps above
 const steps = [
   {
     id: "initial", // the conversation starts here, with the bot reading a notification
     component: (
-      <BuildMessage
-        message={
-          "You are consuming 20% more than your area for air conditioning. Do something about it!"
-        }
-      />
+      <BuildMessage message={testingInitialMessage[currentLanguage]} />
     ),
     asMessage: true,
     trigger: "userQuestion",
@@ -70,7 +79,7 @@ const steps = [
   },
   {
     id: "fetchNotifications", // triggered when the user clicks on the "new notifications" button
-    message: "Okay! I'm fetching your notifications!", // this step is used just to generate this notification bubble
+    message: fetchingNotificationsMessage[currentLanguage], // this step is used just to generate this notification bubble
     trigger: "fetchNotifications2",
   },
   {

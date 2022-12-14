@@ -1,12 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BuildMessage from "./BuildMessage";
+import { currentLanguage } from "../../assets/data";
 
 /**
  * This function creates a 'bubble' that is in a loading state until the answer to the user question is fetched from
  * the server. Then, when the answer is fetched, the BuildMessage component is returned to display it and display
  * the new notification button if there are any.
  */
+
+const serverErrorMessage = {
+  en: "Ops, something went wrong! Please, check your message, or try again later.",
+  it: "Ops, qualcosa è andato storto! Controlla il messaggio, o riprova più tardi.",
+};
+
+const stillLoadingMessage = {
+  en: "Still thinking...",
+  it: "Sto ancora pensando...",
+};
+
+const readNotificationsQuery = {
+  en: "Read notifications",
+  it: "Leggi notifiche",
+};
+
 function MessageBubble(params) {
   const [isLoading, setLoading] = useState(true); // until the answer is fetched, the bubble is in a loading state
   const [answer, setAnswer] = useState();
@@ -15,7 +32,9 @@ function MessageBubble(params) {
     let URI;
     if (params.buttonClicked === "notifications") {
       // this means that the user has not typed anything, but clicked on the new notification button
-      URI = "http://localhost:8080/api/answers/Read notifications";
+      URI =
+        "http://localhost:8080/api/answers/" +
+        readNotificationsQuery[currentLanguage];
     } else {
       // otherwise, the user has typed something and the answer to that question is fetched
       URI = "http://localhost:8080/api/answers/" + params.previousStep.message; // params.previousStep.message is the user question
@@ -32,7 +51,7 @@ function MessageBubble(params) {
       })
       .catch(() => {
         setAnswer(
-          "Ops, something went wrong! Please, check your message, or try again later." // server error
+          serverErrorMessage[currentLanguage] // server error
         );
         setLoading(false);
       });
@@ -41,7 +60,7 @@ function MessageBubble(params) {
   if (isLoading) {
     // by default, the bubble displays a loading message ('...') for one second. After that, another
     // loading message is displayed ('Still thinking...') until the answer is fetched.
-    return <div>Still thinking...</div>;
+    return <div>{stillLoadingMessage[currentLanguage]}</div>;
   }
 
   return (

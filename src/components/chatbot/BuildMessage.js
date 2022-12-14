@@ -1,7 +1,11 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import { colors } from "../../assets/colors";
-import { lastMessageId, setLastMessageId } from "../../assets/data";
+import {
+  currentLanguage,
+  lastMessageId,
+  setLastMessageId,
+} from "../../assets/data";
 import axios from "axios";
 
 const NotificationStyle = styled.button`
@@ -77,17 +81,26 @@ class BuildMessage extends Component {
 
   render() {
     const { trigger, notificationsNumber } = this.state;
+
+    const newNotificationsMessage = {
+      en: "new notifications",
+      it: "nuove notifiche",
+    };
+
     return (
       <div className="message">
         <div>{this.props.message}</div>
         {!trigger && ( // show the number of notifications just if the button was not clicked, there are notifications and this is the last message
           <>
-            {notificationsNumber > 0 && this.state.messageId === lastMessageId && (
-              <NotificationStyle onClick={() => this.triggerNext()}>
-                🔔 {notificationsNumber} new notification
-                {notificationsNumber > 1 ? "s" : ""}
-              </NotificationStyle>
-            )}
+            {notificationsNumber > 0 &&
+              this.state.messageId === lastMessageId && (
+                <NotificationStyle onClick={() => this.triggerNext()}>
+                  🔔{" "}
+                  {notificationsNumber +
+                    " " +
+                    newNotificationsMessage[currentLanguage]}
+                </NotificationStyle>
+              )}
           </>
         )}
       </div>

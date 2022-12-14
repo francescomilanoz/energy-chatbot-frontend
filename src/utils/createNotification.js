@@ -1,17 +1,32 @@
 import axios from "axios";
+import { currentLanguage } from "../assets/data";
 
 /**
  * This function makes an API call to the backend to create a new notification.
  */
+
+const defaultNotificationMessageText = {
+  en: {
+    part1: "Notification for ",
+    part2: " that executes action ",
+    part3: ". Do you want to execute this action? ",
+  },
+  it: {
+    part1: "Notifica per ",
+    part2: " che esegue l'azione ",
+    part3: ". Vuoi eseguire questa azione? ",
+  },
+};
+
 async function createNotification(type, appliance, priority, message) {
   let notificationMessage;
   if (!message) {
     notificationMessage =
-      "Notification for " +
+      defaultNotificationMessageText[currentLanguage].part1 +
       appliance +
-      " that executes action " +
+      defaultNotificationMessageText[currentLanguage].part2 +
       type +
-      ". Do you want to execute that action? ";
+      defaultNotificationMessageText[currentLanguage].part3;
   } else {
     notificationMessage = message;
   }

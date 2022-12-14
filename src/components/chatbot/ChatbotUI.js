@@ -4,6 +4,7 @@ import { ThemeProvider } from "styled-components";
 import steps from "./steps";
 import leaf from "../../assets/images/leaf.png";
 import { colors } from "../../assets/colors";
+import { currentLanguage } from "../../assets/data";
 
 const theme = {
   background: colors.whiteBackground,
@@ -20,6 +21,11 @@ const theme = {
 /**
  * This component displays the chatbot, using the react-simple-chatbot library.
  */
+
+const chatPlaceholder = {
+  en: "Type something...",
+  it: "Scrivi qualcosa...",
+};
 class ChatbotUI extends Component {
   render() {
     return (
@@ -31,6 +37,7 @@ class ChatbotUI extends Component {
           userDelay={0} // used to remove the delay before printing the bubble with the user message
           headerTitle={"💡 EcoBot"}
           botAvatar={leaf}
+          placeholder={chatPlaceholder[currentLanguage]}
         />
       </ThemeProvider>
     );
