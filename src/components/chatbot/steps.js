@@ -19,8 +19,8 @@ const fetchingNotificationsMessage = {
 };
 
 const testingInitialMessage = {
-  en: "You are consuming 20% more than your area for air conditioning. Do something about it!",
-  it: "Stai consumando il 20% in più della tua aria, per quanto riguarda l'aria condizionata. Fai qualcosa a riguardo!",
+  en: "In the last period, your air conditioner consumed 50 kWh. It's a lot! Do something about it!",
+  it: "Nell'ultimo periodo, il tuo climatizzatore ha consumato 50 kWh. E' troppo, fai qualcosa a riguardo!",
 };
 
 // production steps flow: use this steps to use the chatbot normally, in production
